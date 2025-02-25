@@ -1,0 +1,10 @@
+# Sakila Database SQL Queries
+
+This folder contains SQL queries applied to the Sakila sample database, organized by skill level:
+- **Beginner**: Basic queries, filtering, and joins.
+- **Intermediate**: Aggregations, subqueries, and CTEs.
+- **Advanced**: Window functions, stored procedures, and optimizations.
+
+## 📌 Dataset Source  
+To Download the Sakila Database:
+Visit the official MySQL documentation page: https://dev.mysql.com/doc/index-other.html
