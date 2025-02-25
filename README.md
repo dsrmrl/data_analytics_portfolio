@@ -6,8 +6,9 @@ Welcome to my portfolio! This repository showcases my skills in **SQL, Power BI,
 
 ---
 
-## 🔹 About Me  
-I am a data enthusiast skilled in transforming raw data into actionable insights using **SQL, Power BI, Power Query, and Tableau**. My expertise includes:  
+## 🔹 About Me 
+Process Engineer by profession. 
+Also, I am a data enthusiast skilled in transforming raw data into actionable insights using **SQL, Power BI, Power Query, and Tableau**. My expertise includes:  
 - 📌 Writing complex **SQL queries** for data analysis  
 - 📊 Creating **interactive Power BI dashboards**  
 - 🔍 Using **Power Query** for data cleaning and transformation  
