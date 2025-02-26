@@ -1,0 +1,1 @@
+SELECT * FROM sakila.film_category_and_rating;
