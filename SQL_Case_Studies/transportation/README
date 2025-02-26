@@ -1,0 +1,16 @@
+Public Transport Utilisation - Average Trip Distance
+
+Dataset Overview
+
+This project analyzes the "Public Transport Utilisation - Average Trip Distance" dataset from data.gov.sg. The dataset provides insights into the average trip distances across different transportation modes over the years (2004~2014).
+
+**Data Processing Techniques
+
+To analyze and process the dataset, the following SQL techniques were applied:
+Aggregations: Used to compute summary statistics such as avg, min,max and stddev of distance per trip
+Window Functions: Applied calculate year-over-year changes.
+Views: Created to simplify data retrieval by structuring frequently used queries into reusable views.
+Stored Procedures: Developed to allow dynamic data retrieval based on input parameters such as year or transport mode.
+
+Acknowledgment
+Dataset sourced from data.gov.sg. This analysis was conducted using SQL-based transformations and stored procedures to extract meaningful insights into transportation trends.
