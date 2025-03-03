@@ -1,0 +1,48 @@
+README for OWID COVID-19 Data
+
+Overview
+The OWID COVID-19 Data is a comprehensive dataset containing global COVID-19 statistics, including cases, deaths, hospitalizations, testing, and vaccinations. 
+This dataset has been processed to improve data quality by handling missing values, converting data types, and ensuring consistency.
+
+Data Source & Acknowledgment
+The OWID COVID-19 Data is provided by Our World in Data (OWID), an independent research organization that compiles and maintains high-quality global data on COVID-19. 
+The original dataset is available on their GitHub repository under the Creative Commons BY 4.0 license.
+This project acknowledges the efforts of OWID researchers, analysts, and contributors for making this dataset available to the public.
+
+Database Schema
+The dataset is stored in a database schema named db_covid, with the main table:
+owid-covid-data
+
+Views
+Several views have been created for easier data access and analysis:
+
+total_cases_per_location_per_year
+total_cases_per_continent_per_year
+top10_total_cases_per_year
+top5_total_cases_per_continent
+survival_and_mortality_by_year_per_continent
+locations
+continents
+
+Stored Procedures
+The following stored procedures automate common data processing tasks:
+
+survival_and_mortality_per_yr_by_continent
+get_top10_in_total_cases_per_yr
+total_cases_by_location_per_yr
+totalcase_summary_by_continent
+totalcase_summary_by_location
+
+
+Data Cleaning Steps
+Identified and replaced non-numeric values in numeric columns.
+Standardized date formats.
+Converted appropriate columns to BIGINT or DOUBLE based on data type requirements.
+
+
+Notes
+The dataset is updated regularly. Ensure that stored procedures are executed after data updates.
+Use the views for efficient querying rather than querying the main table directly.
+
+Last updated: March 2025
+
