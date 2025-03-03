@@ -1,0 +1,1 @@
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `db_covid`.`dim_continents` AS select distinct `db_covid`.`owid-covid-data`.`continent` AS `continent` from `db_covid`.`owid-covid-data`
