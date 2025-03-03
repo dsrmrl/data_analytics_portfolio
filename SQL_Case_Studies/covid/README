@@ -15,17 +15,22 @@ owid-covid-data
 
 Views
 Several views have been created for easier data access and analysis:
-total_cases_per_location_per_year –   Aggregates total COVID-19 cases per location, grouped by year.
-total_cases_per_continent_per_year –   Aggregates total COVID-19 cases per continent, grouped by year.
-top10_total_cases_per_year –     Retrieves the top 10 locations with the highest total cases for each year.
-top5_total_cases_per_continent –   Retrieves the top 5 locations in total cases per continent.
-survival_and_mortality_by_year_per_continent –   Computes survival and mortality rates for each year per continent.
-locations –   Provides a list of unique locations included in the dataset.
-continents –   Lists all continents present in the dataset.
 
+totalcasesperlocationperyear –   Aggregates total COVID-19 cases per location, grouped by year.
+totalcasespercontinentperyear –   Aggregates total COVID-19 cases per continent, grouped by year.
+top10totalcasesperyear –     Retrieves the top 10 locations with the highest total cases for each year.
+top5totalcasespercontinent –   Retrieves the top 5 locations in total cases per continent.
+survivalandmortalitybyyearpercontinent –   Computes survival and mortality rates for each year per continent.
+dimlocations –   Provides a list of unique locations included in the dataset.
+dimcontinents –   Lists all continents present in the dataset.
+totaldeathspercentagepercontinent - Calculates the percentage of total deaths relative to total cases per continent.
+casespervaxxandpopulationpercontinent - Provides the total cases, vaccinations, and population per continent.
+vaxxtocasesanddeathsratio - Calculates the ratio of vaccinations to cases and deaths per continent.
+deathstopopulationratiopercontinent - Shows the percentage of total deaths relative to the total population per continent.
 
 Stored Procedures
 The following stored procedures automate common data processing tasks:
+
 survival_and_mortality_per_yr_by_continent –   Computes the survival and mortality rates per continent for each year.
 get_top10_in_total_cases_per_yr –   Retrieves the top 10 locations with the highest total cases for a given year.
 total_cases_by_location_per_yr –   Aggregates total cases for each location per year.
