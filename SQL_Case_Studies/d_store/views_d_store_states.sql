@@ -1,0 +1,1 @@
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `d_store`.`distinct_states` AS select distinct `d_store`.`customers`.`state` AS `state` from `d_store`.`customers` order by `d_store`.`customers`.`state`
