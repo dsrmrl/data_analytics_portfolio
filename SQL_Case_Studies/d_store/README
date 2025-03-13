@@ -1,0 +1,66 @@
+# D-Store Case Study
+
+## Overview
+The **D-Store** case study is a structured database project designed to demonstrate intermediate to advanced SQL skills. The database and queries are modeled after concepts learned in a MySQL certification course, incorporating data retrieval, transformation, and procedural operations.
+
+## Files
+
+### 1. Database Creation
+- **create_d_store.sql**  
+  This script creates the D-Store database, including all necessary tables and constraints. The database structure is modeled after the example provided in the MySQL certification course.
+
+### 2. SQL Queries & Views
+- **sql_query_2025Mar12.sql**  
+  This script contains all the SQL queries, including the creation of views using intermediate to advanced SQL techniques.
+
+#### Views and Their Insights:
+- **views_d_store_cities.sql**  
+  Retrieves a list of all cities where D-Store operates, potentially used for geographical analysis.
+
+- **views_d_store_states.sql**  
+  Provides a summary of all states in which D-Store has customers and operations.
+
+- **views_d_store_productswithoutorders.sql**  
+  Identifies products that have not been ordered, which could indicate slow-moving inventory.
+
+- **views_d_store_customerswithoutorders.sql**  
+  Lists customers who have registered but never placed an order, useful for targeted marketing campaigns.
+
+- **views_d_store_shippedorders.sql**  
+  Displays details of orders that have been successfully shipped, assisting in logistics tracking.
+
+- **views_d_store_customercountbystate.sql**  
+  Counts the number of customers per state, offering insights into geographic customer distribution.
+
+- **views_d_store_customercountbypoints.sql**  
+  Groups customers based on reward points, useful for loyalty program analysis.
+
+- **views_d_store_customercountbydecade.sql**  
+  Segments customers based on birth decade, helpful for demographic analysis.
+
+- **views_d_store_customercountbycity.sql**  
+  Displays the number of customers per city, useful for regional sales analysis.
+
+- **views_d_store_customercountbyageandmembership.sql**  
+  Analyzes customer distribution based on age groups and membership status.
+
+- **views_d_store_customercountbystateandmembership.sql**  
+  Provides insights into customer distribution by state and membership level.
+
+### 3. Stored Procedures
+- **procedure_get_orders_by_status.sql**  
+  Retrieves orders based on their status (e.g., processed, shipped, delivered), useful for order management.
+
+- **procedure_get_customers_by_state.sql**  
+  Returns a list of customers filtered by state, assisting in regional marketing strategies.
+
+Indexing
+
+Indexes were created on key columns to optimize query performance and improve data retrieval efficiency. These indexes ensure that searches, joins, and aggregations execute faster, enhancing overall database performance.
+
+## Usage
+These SQL scripts can be used for learning, practice, and real-world data analysis. The views and procedures support business intelligence use cases, improving decision-making through structured queries.
+
+## Author
+This case study was developed based on knowledge gained from a MySQL certification course and serves as a demonstration of SQL expertise in data retrieval, aggregation, and procedural programming.
+
