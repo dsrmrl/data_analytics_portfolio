@@ -1,0 +1,1 @@
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `d_store`.`customer_count_by_state` AS select `d_store`.`customers`.`state` AS `state`,count(0) AS `count` from `d_store`.`customers` group by `d_store`.`customers`.`state` order by `count` desc
