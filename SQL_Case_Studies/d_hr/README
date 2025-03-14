@@ -1,0 +1,52 @@
+# D-HR Database: My Study Case
+
+## Introduction
+
+Welcome to my study case on the `D-HR` database! As part of my SQL certification journey, I created this database to explore key HR-related queries and data analysis techniques. The stelture and queries are inspired by the practice files used in my certification course, with some enhancements to deepen my understanding of indexing, employee-manager relationships, and salary analysis.
+
+## Database Structure & Files
+
+### **1. Database Creation**
+
+- **`create_d_hr.sql`** – This script sets up the `D-HR` database and its tables. I structured it similarly to the practice databases from my course, ensuring a solid foundation for executing HR-related queries.
+
+### **2. Queries (\*\sql\_query\_d\_hr\_202503\_14.sql\*\)**
+
+This file contains SQL queries that I used to analyze different aspects of employee data. Some of the key tasks include:
+
+- **Checking and Creating Indexes** – Optimizing query performance.
+- **Retrieving Managers for Each Employee** – Understanding hierarchical relationships.
+- **Ordering Employees by Manager and Salary** – Sorting in a structured way.
+- **Counting Employees per Manager** – Identifying team sizes.
+- **Finding Employees with Above-Average Salaries** – Both overall and relative to their manager’s average salary.
+
+### **3. Views (Predefined Queries for Insights)**
+
+To make my analysis more efficient, I created views that provide quick access to key insights:
+
+- **`views_avgsalaryandavgsalarypermanager.sql`** – Displays the overall average salary and the average salary per manager.
+- **`views_employeecountpermanager.sql`** – Summarizes the number of employees reporting to each manager.
+- **`views_recordsofemployeemanagers.sql`** – Provides a structured view of employee-manager relationships.
+
+### **4. Stored Procedure**
+
+- **`procedure_get_employees_per_office_id.sql`** – A procedure I wrote to dynamically retrieve employees based on their office ID, useful for location-based analysis.
+
+## How I Use This Database
+
+1. **I first set up the database** by running `create_d_hr.sql`.
+2. **I execute my queries** from `sql_query_d_hr_202503_14.sql` to gain insights into the data.
+3. **I use views** to quickly reference commonly used insights without rewriting queries.
+4. **I call stored procedures** for dynamic queries, particularly when filtering employees by office location.
+
+## My Key Learnings
+
+- **Indexing matters!** Proper indexes significantly improve performance.
+- **Self-joins are powerful** for analyzing hierarchical data like managers and employees.
+- Aggregations, window functions and subqueries help uncover valuable insights, such as salary comparisons.
+- **Views save time** by simplifying frequently used queries.
+
+---
+
+This project has been a great way for me to apply my SQL skills in a structured, real-world scenario. I plan to keep refining and expanding this database as I continue learning. If you have any suggestions or ideas for improvement, I'd love to hear them!
+
