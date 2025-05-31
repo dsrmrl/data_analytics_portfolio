@@ -1,0 +1,74 @@
+# Recalls Data
+
+This dataset contains detailed information on vehicle safety recalls reported to the National Highway Traffic Safety Administration (NHTSA). It encompasses recalls for vehicles, tires, car seats, and equipment, with records dating back to 1966. The dataset is updated regularly and includes completion rates from the latest Recall Quarterly or Annual Reports starting from 2015 Q1.([Data.gov][2])
+
+## Dataset Overview
+
+* **Publisher:** National Highway Traffic Safety Administration (NHTSA)
+* **Source:** [Data.gov - Recalls Data](https://catalog.data.gov/dataset/recalls-data)
+* **Last Updated:** May 31, 2025
+* **Data Formats:** CSV, JSON, XML, RDF
+* **Coverage:** United States
+* **Time Span:** 1966 – Present([Data.gov][2], [Data.gov][3])
+
+## Contents
+
+Each record in the dataset includes:
+
+* **Recall Campaign Number:** Unique identifier for the recall.
+* **Manufacturer:** Company responsible for the recalled product.
+* **Recall Type:** Category of the recall (e.g., vehicle, tire, car seat, equipment).
+* **Component:** Specific part or system involved in the recall.
+* **Report Date:** Date when the recall was reported to NHTSA.
+* **Defect Summary:** Brief description of the safety issue.
+* **Consequence Summary:** Potential risks or hazards associated with the defect.
+* **Remedy Summary:** Manufacturer's proposed solution to address the defect.
+* **Completion Rate:** Percentage of affected units that have been remedied, available from 2015 Q1 onward.([Data.gov][4], [Data.gov][5], [Data.gov][2], [Data.gov][6])
+
+## Usage
+
+This dataset is invaluable for:
+
+* **Researchers and Analysts:** Studying trends in vehicle safety and manufacturer compliance.
+* **Regulatory Agencies:** Monitoring recall effectiveness and enforcing safety standards.
+* **Manufacturers:** Benchmarking recall performance and identifying areas for improvement.
+* **Consumers:** Checking for recalls related to their vehicles or equipment.([Data.gov][7], [Data.gov][8])
+
+## Accessing the Data
+
+The dataset can be accessed and downloaded in various formats:
+
+* **CSV:** [Download CSV](https://data.transportation.gov/api/views/6axg-epim/rows.csv?accessType=DOWNLOAD)
+* **JSON:** [Download JSON](https://data.transportation.gov/api/views/6axg-epim/rows.json?accessType=DOWNLOAD)
+* **XML:** [Download XML](https://data.transportation.gov/api/views/6axg-epim/rows.xml?accessType=DOWNLOAD)
+* **RDF:** [Download RDF](https://data.transportation.gov/api/views/6axg-epim/rows.rdf?accessType=DOWNLOAD)([Data.gov][1])
+
+## Legal and Compliance Notes
+
+Manufacturers are legally obligated to report safety defects or noncompliance with federal standards to NHTSA within five business days, as mandated by Federal Regulation 49 CFR Part 573. Failure to comply can result in significant penalties.([Data.gov][2])
+
+## Limitations
+
+* **Data Completeness:** While comprehensive, some older records may lack detailed information.
+* **Update Frequency:** Completion rates are updated quarterly; there may be a lag in the most recent data.
+* **Data Accuracy:** Information is self-reported by manufacturers and may be subject to verification.([Data.gov][9], [Data.gov][2], [Data.gov][10])
+
+## Additional Resources
+
+* **NHTSA Recall Reports:** [Annual Recall Reports](https://www.nhtsa.gov/sites/nhtsa.gov/files/2023-03/2022-Recalls-Annual-Report_030223-tag.pdf)
+* **SaferCar.gov:** [Check for Recalls](https://www.nhtsa.gov/recalls)
+
+---
+
+For more information or to report a safety issue, visit the [NHTSA website](https://www.nhtsa.gov/).
+
+[1]: https://catalog.data.gov/dataset/recalls-data/resource/8f0901c5-9461-419e-9881-48738db91d96?utm_source=chatgpt.com "RDF File - Recalls Data - Dataset - Catalog"
+[2]: https://catalog.data.gov/dataset/recalls-data?utm_source=chatgpt.com "Recalls Data - Dataset - Catalog"
+[3]: https://catalog.data.gov/dataset/?+Human+Services=&_tags_limit=0&amp=&organization=dot-gov&organization_type=Federal+Government&res_format=RDF&utm_source=chatgpt.com "Federal Government - Dataset - Catalog - Data.gov"
+[4]: https://catalog.data.gov/dataset?q=recall&tags=recalls&utm_source=chatgpt.com "Recalls Data - Dataset - Catalog"
+[5]: https://catalog.data.gov/dataset/fda-abbott-infant-formula-recall?utm_source=chatgpt.com "FDA Abbott Infant Formula Recall - Dataset - Catalog - Data.gov"
+[6]: https://catalog.data.gov/dataset?q=recall&utm_source=chatgpt.com "139 datasets found for \"recall\""
+[7]: https://catalog.data.gov/dataset?ta=&tags=car&utm_source=chatgpt.com "Dataset - Catalog - Data.gov"
+[8]: https://catalog.data.gov/dataset/enforcement-reports?utm_source=chatgpt.com "Enforcement Reports - Dataset - Catalog - Data.gov"
+[9]: https://catalog.data.gov/dataset/fsis-summary-of-recall-cases-in-calendar-year?utm_source=chatgpt.com "FSIS - Summary of Recall Cases in Calendar Year - Dataset - Catalog"
+[10]: https://catalog.data.gov/dataset?q=organization%3A%28%28cpsc-gov%29%29&tags=recalls&utm_source=chatgpt.com "US Consumer Product Safety Commission - Dataset - Catalog"
