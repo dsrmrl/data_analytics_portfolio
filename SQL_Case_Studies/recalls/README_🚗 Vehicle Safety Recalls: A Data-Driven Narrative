@@ -1,0 +1,85 @@
+
+## 🚗 Vehicle Safety Recalls: A Data-Driven Narrative
+
+### 1. **How Big Is the Problem?**
+
+To understand the scale of vehicle safety issues in the U.S., we began by counting **distinct recall records by year**. This baseline showed how regulatory reporting and manufacturer accountability have evolved over time.
+
+> 🔍 **Insight:** The year with the **highest number of recalls** was identified. This spike invites deeper investigation—was it due to improved detection, regulatory pressure, or a manufacturer-specific issue?
+
+---
+
+### 2. **Who's Involved?**
+
+We profiled the ecosystem of manufacturers involved in recalls.
+
+* We listed all **distinct manufacturers** and their corresponding **recall volumes**.
+* We also ranked **vehicle components** to determine which systems (e.g., airbags, brakes, electrical systems) are most frequently flagged.
+
+> 🔧 **Insight:** Certain components consistently appear in recalls, suggesting systemic engineering or supply chain vulnerabilities.
+
+---
+
+### 3. **What Kind of Recalls Are Being Issued?**
+
+Next, we broke down the **types of recalls** (vehicles, tires, child seats, equipment) and the volume per category.
+
+> 🏷️ **Insight:** One category dominates the recall space—offering opportunities for preventive redesign or focused regulatory oversight.
+
+We also included a check on **Park Outside Advisories (PO\_ADV)** to understand how often critical safety instructions are issued to avoid fire or explosion risks.
+
+---
+
+### 4. **Are Recalls Being Resolved?**
+
+We zeroed in on **manufacturers with 90%–100% recall completion rates**, a key performance indicator of public safety accountability.
+
+> 🛠️ **Insight:** Only a few manufacturers consistently meet high completion standards—showcasing best practices in recall response and consumer outreach.
+
+---
+
+### 5. **Where Are the Gaps in Reporting?**
+
+Using a **cross-join of all recall types and years**, we identified **missing combinations**—situations where certain recall types were never reported for specific years.
+
+* This was materialized as **views** to enable ongoing audit and future data refresh.
+* A secondary query summarized these gaps by isolating the **top 10 recall cases** with the **highest potential impact**, based on units affected.
+
+> ❗ **Insight:** These gaps can represent either underreporting or actual absence of defects, but they highlight areas for targeted investigation.
+
+---
+
+### 6. **Who Are the Top Offenders?**
+
+To keep stakeholders informed, we created a **stored procedure** that retrieves the **top 3 manufacturers per recall type and year**.
+
+> 📊 **Insight:** This allows dynamic slicing of data to monitor repeat offenders or emerging patterns per recall category.
+
+---
+
+### 7. **What About the Most Severe Advisories?**
+
+We flagged manufacturers and recall types associated with **"Do Not Drive" advisories**—the most severe form of recall alert.
+
+> 🚨 **Insight:** One recall type in particular dominates the "Do Not Drive" category, pointing to elevated risk and urgency for consumer compliance.
+
+---
+
+### 8. **How Can Users Explore the Data Freely?**
+
+To support ad hoc exploration, a **stored procedure was built** allowing users to **search recalls by keyword**, filtering by **component and year**.
+
+> 🔎 **Use Case:** Safety analysts and researchers can now self-serve targeted queries without manually navigating the entire dataset.
+
+---
+
+## 📈 Final Thoughts
+
+This multi-layered approach—from high-level volume trends to granular advisory flags—exposes patterns in manufacturer behavior, regulatory gaps, and product risk areas. The use of stored procedures and views ensures that the insights remain scalable, searchable, and operationally useful.
+
+**Next Steps:**
+
+* Add demographic overlays to study consumer impact.
+* Integrate with vehicle registration databases for regional breakdowns.
+* Track recall completion over time for high-risk categories.
+
