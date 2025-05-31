@@ -1,0 +1,325 @@
+USE recalls ;
+
+# import recalls db using UI ; Table Data Import Wizard 
+# select columns not needed by unchecking column name
+# selected columns are as follows;
+# 	   Report Received Date
+#      NHTSA ID
+#      Manufacturer
+#      Subject
+#      Component
+#      Recall Type
+#      Potentially Affected
+#      Park Outside Advisory
+#      Do Not Drive Advisory
+#      Completion Rate % (Blank -  Not Reported)
+     
+
+# original table
+# SELECT * FROM recalls.recalls_data;
+
+# using UI, duplicate original table and change schema as necessary; proper naming convention, data types, properties
+# rename new table as ; recalls_data_cleaned
+# using UI, also added 2 new columns for conversion to correct data type 
+	# column1: Report Received Date (text to date)
+	# column2: Completion Rate % (Blank - Not Reported)  (text to decimal)
+
+# DROP TABLE IF EXISTS recalls_data_cleaned ;
+# CREATE TABLE recalls_data_cleaned AS
+	# 	SELECT *
+	#  FROM recalls_data ;
+		
+# check new created table
+SELECT  *
+FROM recalls_data_cleaned ;
+
+# start of data cleaning
+# check for duplicates
+	# output returned same row count ; 28312
+SELECT 
+	COUNT(*)
+	, COUNT(DISTINCT id) # assigned as PK 
+FROM recalls_data_cleaned ;
+
+
+# original text columns cannot be directly converted to date type in the schema, transformation must be done manually 
+# check for NULL values
+# SELECT
+# 	report_date
+# FROM recalls_data_cleaned
+# WHERE report_date IS NULL ;
+
+
+# update date column 
+# UPDATE recalls_data_cleaned
+# SET `date` = str_to_date(report_date, '%m/%d/%Y') ;
+
+
+# convert text column to decimal 
+# check first for empty , null values
+# SELECT
+# 	DISTINCT completion_rate
+#     , COUNT(*) AS records
+# FROM recalls_data_cleaned 
+# GROUP BY completion_rate ;
+
+
+# test script for errors before updating data
+# WITH cte AS (
+# SELECT
+# 	CAST(
+# 		CASE WHEN
+# 			completion_rate = '' THEN '0.99' ELSE completion_rate END AS DECIMAL(5,2) ) AS comp_rate_cleaned
+# FROM recalls_data_cleaned 
+# )
+# SELECT 
+# 	DISTINCT comp_rate_cleaned
+# 	, COUNT(*) AS records
+# FROM cte 
+# GROUP BY comp_rate_cleaned ;
+
+# update table ; convert text column to decimal
+# UPDATE recalls_data_cleaned
+# SET comp_rate =  CAST(
+# 		CASE WHEN
+# 			completion_rate = '' THEN '0.99' ELSE completion_rate END AS DECIMAL(5,2) ) ;
+
+# ALTER TABLE recalls_data_cleaned
+# DROP COLUMN report_date,
+# DROP COLUMN completion_rate ;
+
+# re-position date to first column
+# ALTER TABLE recalls_data_cleaned
+# MODIFY COLUMN date DATE FIRST ;          
+
+# change case to lower case
+# UPDATE recalls_data_cleaned
+# SET 
+# 	`manufacturer` = LOWER(manufacturer) 
+# 	, `subject` = LOWER(`subject`) 
+# 	, `component` = LOWER(`component`) 
+# 	, recall_type = LOWER(recall_type) ;  
+
+# end of data cleaning
+
+
+# start of data exploration
+# retrieve distinct year and record count
+# 	output returned years; 1966 - 2024
+SELECT
+	YEAR(`date`) AS `year`
+     , COUNT(*) AS records
+FROM recalls_data_cleaned
+GROUP BY 
+	YEAR(`date`) WITH ROLLUP
+ORDER BY `year` DESC;
+
+
+# 	determine the year with the most number of records 
+	# results showed the year 2021 with the highest number of recall records
+SELECT
+	YEAR(`date`) AS `year`
+     , COUNT(*) AS records
+FROM recalls_data_cleaned
+GROUP BY 
+	YEAR(`date`) WITH ROLLUP
+ORDER BY records DESC;
+
+
+# retrieve distinct manufacturers and record count
+	# results shows manufacturers with most numbers of recalls in descending order
+SELECT
+	DISTINCT manufacturer
+     , COUNT(*) AS records
+FROM recalls_data_cleaned
+GROUP BY manufacturer  WITH ROLLUP 
+ORDER BY COUNT(*) DESC ;
+
+
+# retrieve distinct components and record count
+	# output returned 40 rows
+    # results shows which components are mostly affected by recalls
+SELECT	
+	DISTINCT `component`
+     , COUNT(*) AS records
+FROM recalls_data_cleaned
+GROUP BY `component`
+ORDER BY COUNT(*) DESC ;
+
+
+# retrieve distinct recall_type and record count
+	# output returned 4 rows
+SELECT	
+	DISTINCT `recall_type`
+     , COUNT(*) AS records
+FROM recalls_data_cleaned
+GROUP BY `recall_type` 
+ORDER BY records DESC ;
+
+
+# retrieve distinct po_adv values and row count
+# also to check if there are nulls or empty values
+	# output returned 2 distinct values, no NULL or empty rows
+    # park outside advisory result showed Yes = 65, No = 28247
+SELECT	
+	DISTINCT po_adv
+     , COUNT(*) AS records
+FROM recalls_data_cleaned
+GROUP BY po_adv ;
+
+
+# output returned 2 distinct values, no NULL or empty rows
+# do not drive advisory result showed Yes = 156, No = 28156
+SELECT	
+	DISTINCT dnd_adv
+     , COUNT(*) AS records
+FROM recalls_data_cleaned
+GROUP BY dnd_adv ;
+
+
+# manufacturers with 90% - 100% recall completion rate
+	# output returned 438 rows
+SELECT
+	DISTINCT manufacturer 
+     , COUNT(*) AS records 
+FROM recalls_data_cleaned
+WHERE comp_rate BETWEEN 90 AND 100
+GROUP BY manufacturer 
+ORDER BY COUNT(*) DESC ;
+
+
+# retrieve all combinations of recall_type and years that are not present in the recalls dataset
+# this query was then created as views for further summary and easier access 
+# view name ; recalls.recall_type_year_gaps
+	# output returned 20 rows 
+		WITH RECURSIVE bounds AS (
+		    SELECT 
+			 YEAR(MIN(`date`)) AS min_year
+			 , YEAR(MAX(`date`)) AS max_year
+		    FROM recalls_data_cleaned
+		),
+		 years AS (
+		    SELECT min_year AS `year` FROM bounds
+		    UNION ALL
+		    SELECT `year` + 1 FROM years, bounds
+		    WHERE `year` + 1 <= bounds.max_year
+		),
+		  recall_types AS (
+			SELECT DISTINCT recall_type FROM recalls_data_cleaned
+		),
+		year_type_combination AS (
+			SELECT y.year, r.recall_type
+			FROM years y
+			CROSS JOIN recall_types r
+		)
+SELECT 
+	c.year
+	, c.recall_type
+FROM year_type_combination c
+LEFT JOIN recalls_data_cleaned d 
+	ON YEAR(d.date) = c.year AND
+	d.recall_type = c.recall_type
+WHERE d.recall_type IS NULL
+ORDER BY 
+	c.year DESC
+     , c.recall_type ;
+
+# summarize gaps in recall_types and year
+	# results showed child seat, eqiupment and tire did not appear in recall records for 13, 4 and 3 years respectively
+SELECT 
+	recall_type
+     , COUNT(*) AS years
+FROM recalls.recall_type_year_gaps
+GROUP BY recall_type ;
+
+
+# retrieve top n = 10 records with the most number of units potentially affected 
+# return year, manufacturer, component , recall_type and potentially_affected
+SELECT 
+	YEAR(`date`) AS `year`
+     , manufacturer
+     , `component`
+     , recall_type
+     , potentially_affected
+FROM recalls_data_cleaned
+ORDER BY potentially_affected DESC 
+LIMIT 10 ;
+
+
+# retrieve top n = 3 manufacturer  per recall_type by year
+	# returned 627 rows
+WITH summary AS (
+		SELECT
+			YEAR(`date`) AS `year`
+			, manufacturer
+			, COUNT(*) AS records
+			, recall_type
+		FROM recalls_data_cleaned
+		GROUP BY
+			YEAR(`date`)
+			, manufacturer
+			, recall_type
+),
+ranked AS (
+SELECT 
+	*
+	, ROW_NUMBER() OVER(PARTITION BY recall_type, `year` ORDER BY records DESC) AS rn    
+FROM summary 
+)
+SELECT 
+	`year`
+    , rn
+    , manufacturer
+    , records
+    , recall_type
+FROM ranked
+WHERE rn <= 3 
+ORDER BY 
+	`year` DESC
+    , recall_type 
+    , rn ;
+
+# counter check results by retrieving results for year = 2021 and recall_type = vehicle
+SELECT
+			YEAR(`date`) AS `year`
+			, manufacturer
+			, COUNT(*) AS records
+			, recall_type
+FROM recalls_data_cleaned
+WHERE YEAR(`date`) = 2021 AND recall_type = 'vehicle'
+GROUP BY
+	YEAR(`date`)
+	, manufacturer
+	, recall_type
+ORDER BY 
+     records DESC 
+LIMIT 3 ;
+
+
+# retrieve manufacturers and recall type with do not drive advisory
+SELECT
+	manufacturer
+     , recall_type
+     , count(*) AS records
+FROM recalls_data_cleaned
+WHERE dnd_adv = "Yes"
+GROUP BY
+	manufacturer
+     , recall_type
+ORDER BY 
+	count(*) DESC
+     , recall_type ;	
+     
+     
+# recall type with the most do not drive advisory recalls
+SELECT
+	recall_type 
+     , count(*) AS records
+FROM recalls_data_cleaned
+WHERE dnd_adv = "Yes"
+GROUP BY
+	recall_type
+ORDER BY
+	count(*) DESC
+     
+     
